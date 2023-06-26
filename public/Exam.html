@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=0.1" />
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Exam</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/main.css">
+	<link
+	rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+	<link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+    />
+	<script src="js/Exam.js"></script>
+	<link rel="stylesheet" href="css/mdb.min.css" />
+	<style>
+		label {
+    display: block;
+    font: 1rem 'Fira Sans', sans-serif;
+    }
+input,label {
+     margin: .4rem 0;
+    }
+	td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+		</style>
+
+</head>
+
+<body>
+	<div id="mySidebar" class="sidebar">
+		<img src="photos/logo.jpg" class="circular--square"/>
+  <a href="Registration.html"><i class="material-icons md-48 md-dark des">account_box</i>Registration</a>
+  <button class="accordion"><i class="material-icons md-48 md-dark des">article</i>Exam Paper</button>
+<div class="panel">
+    <a href="makepaper.html"><i class="material-icons md-48 md-dark des">edit_note</i>Make Paper</a>
+   <a href="uploadpaper.html"><i class="material-icons md-48 md-dark des">upload_file</i>Upload Paper</a>
+</div>
+  <a href="Exam.html"><i class="material-icons md-48 md-dark des">note_add</i>Exam</a>
+  <a href="Result.html"><i class="material-icons md-48 md-dark des">leaderboard</i>Result</a>
+  <a href="Statistics.html"><i class="material-icons md-48 md-dark des">analytics</i>Statistics</a>
+  <a href="Index.html"><i class="material-icons md-48 md-dark des">logout</i>Logout</a>
+</div>
+<div id="main">
+  <div class="container" onclick="myFunction(this),openNav(),closeNav()">
+  <div class="bar1"></div>
+  <div class="bar2"></div>
+  <div class="bar3"></div>
+</div>
+<ul class="nav nav-tabs nav-justified mb-3" id="ex1" role="tablist">
+	<li class="nav-item" role="presentation">
+	  <a
+		class="nav-link active"
+		id="ex3-tab-1"
+		data-mdb-toggle="tab"
+		href="#ex3-tabs-1"
+		role="tab"
+		aria-controls="ex3-tabs-1"
+		aria-selected="true"
+		>Schedule Exam</a
+	  >
+	</li>
+	<li class="nav-item" role="presentation">
+		<a
+		  class="nav-link"
+		  id="ex1-tab-3"
+		  data-mdb-toggle="tab"
+		  href="#ex1-tabs-3"
+		  role="tab"
+		  aria-controls="ex1-tabs-3"
+		  aria-selected="false"
+		  >Sheduled exams</a
+		>
+	  </li>
+  </ul>
+  <div class="tab-content" id="ex2-content">
+	<div
+	  class="tab-pane fade show active"
+	  id="ex3-tabs-1"
+	  role="tabpanel"
+	  aria-labelledby="ex3-tab-1"
+	>
+	<table id="table1" class="table">
+		<thead>   
+			<tr>
+				<td style="width:40%">Exam Name</td>
+				<td style="width:15%">Schedule time</td>
+				<td style="width:15%">Time</td>
+				<td style="width:20%">Department</td>
+				<td style="width:10%">Year</td>
+				<td style="width:10%">Submit</td>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	  </table>
+	</div>
+	<div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
+		<table class="table" id="sheduledtable">
+			<td style="width:10%">S.no</td>
+				<td style="width:30%">Exam Name</td>
+				<td style="width:15%">Schedule time</td>
+				<td style="width:15%">Time</td>
+				<td style="width:20%">Department</td>
+				<td style="width:10%">Year</td>
+				<td style="width:10%">Delete</td>
+			</thead>
+		</table>
+	  </div>
+  </div>
+</div>
+	<script>
+		
+		var val1=0;
+		function openNav() {
+		  document.getElementById("mySidebar").style.width = "250px";
+		  document.getElementById("main").style.marginLeft = "250px";
+		}
+		
+		function closeNav() {
+		  val1+=1
+		  if(val1%2==0){
+		  document.getElementById("mySidebar").style.width = "0";
+		  document.getElementById("main").style.marginLeft= "0";
+		  }
+		}
+		function myFunction(x) {
+		  x.classList.toggle("change");
+		}
+		</script>
+		<script>
+		create()
+		sheduled("paper1","23 july 2001 10:30",3,"Cse","1")
+		function create(){
+			var tableval=document.getElementById("table1");
+			var row=tableval.insertRow();
+			var cell1=row.insertCell(0);
+			var cell2=row.insertCell(1);
+			var cell3=row.insertCell(2);
+			var cell4=row.insertCell(3);
+			var cell5=row.insertCell(4);
+			var cell6=row.insertCell(5);
+			cell1.innerHTML=`<select class="form-select selectstyle" id="myoption" style="box-shadow:none;margin-top:7px" onchange="question()">
+				<option>Select Paper</option>
+				
+  </select>`
+			cell2.innerHTML=`
+<input style="height:40px" type="datetime-local" id="meeting-time"
+       name="meeting-time">`
+			cell3.innerHTML=`<div style="margin:0px" class="form-outline form-outline-lg">
+  <input type="number" id="typeNumber" class="form-control form-control-lg" />
+  <label class="form-label form-label-lg" for="typeNumber">Time in Hrs</label>
+</div>`
+            cell4.innerHTML=`<select class="form-select selectstyle" id="myoption" style="box-shadow:none;margin-top:7px" onchange="question()">
+				<option>Department</option>
+				<option>ECE</option>
+	<option>CSE</option>
+	<option>EEE</option>
+	<option>IT</option>
+  </select>`
+  			cell5.innerHTML=`<select class="form-select selectstyle" id="myoption" style="box-shadow:none;margin-top:7px" onchange="question()">
+				<option>Year</option>
+				<option>1</option>
+	<option>2</option>
+	<option>3</option>
+	<option>4</option>
+  </select>`
+  			cell6.innerHTML=`<button type="button" style="margin-top:7px" class="btn btn-primary">Schedule</button`
+
+		}
+		
+			function sheduled(papername,date,time,department,year){
+			var tableval=document.getElementById("sheduledtable");
+			var row=tableval.insertRow();
+			var cell1=row.insertCell(0);
+			var cell2=row.insertCell(1);
+			var cell3=row.insertCell(2);
+			var cell4=row.insertCell(3);
+			var cell5=row.insertCell(4);
+			var cell6=row.insertCell(5);
+			var cell7=row.insertCell(6);
+			cell1.innerHTML = tableval.rows.length-1;
+			cell2.innerHTML=papername;
+			cell3.innerHTML=date
+			cell4.innerHTML=time
+            cell5.innerHTML=department
+  			cell6.innerHTML=year
+  			cell7.innerHTML=`<button type="button" style="margin-top:7px" class="btn btn-danger">Delete</button`
+
+		}
+		
+	</script>
+	<script>
+		var acc = document.getElementsByClassName("accordion");
+		var i;
+		
+		for (i = 0; i < acc.length; i++) {
+		  acc[i].addEventListener("click", function() {
+			this.classList.toggle("active1");
+			var panel = this.nextElementSibling;
+			if (panel.style.maxHeight) {
+			  panel.style.maxHeight = null;
+			} else {
+			  panel.style.maxHeight = panel.scrollHeight + "px";
+			} 
+		  });
+		}
+		</script>
+	<script type="text/javascript" src="js/mdb.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=0.1" />
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Registration</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/main.css">
+	<script  src="/__/firebase/9.8.0/firebase-app-compat.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script  src="/__/firebase/9.8.0/firebase-auth-compat.js"></script>
+    <script  src="/__/firebase/9.8.0/firebase-database-compat.js"></script>
+    <script src="/__/firebase/9.8.0/firebase-firestore-compat.js"></script>
+    <script src="/__/firebase/9.8.0/firebase-functions-compat.js"></script>
+    <script src="/__/firebase/9.8.0/firebase-messaging-compat.js"></script>
+    <script  src="/__/firebase/9.8.0/firebase-storage-compat.js"></script>
+    <script  src="/__/firebase/9.8.0/firebase-analytics-compat.js"></script>
+    <script  src="/__/firebase/9.8.0/firebase-remote-config-compat.js"></script>
+    <script  src="/__/firebase/9.8.0/firebase-performance-compat.js"></script>
+    <!-- 
+      initialize the SDK after all desired features are loaded, set useEmulator to false
+      to avoid connecting the SDK to running emulators.
+    -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+	<script src="https://unpkg.com/read-excel-file@5.x/bundle/read-excel-file.min.js"></script>
+	<link
+	rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+	<link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+    />
+	<link rel="stylesheet" href="css/mdb.min.css" />
+<style>
+	.no-select {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+		}
+</style>
+</head>
+
+<body>
+	<div id="mySidebar" class="sidebar">
+		<img src="photos/logo.jpg" class="circular--square"/>
+  <a href="Registration.html"><i class="material-icons md-48 md-dark des">account_box</i>Registration</a>
+  <button class="accordion"><i class="material-icons md-48 md-dark des">article</i>Exam Paper</button>
+<div class="panel">
+    <a href="makepaper.html"><i class="material-icons md-48 md-dark des">edit_note</i>Make Paper</a>
+   <a href="uploadpaper.html"><i class="material-icons md-48 md-dark des">upload_file</i>Upload Paper</a>
+</div>
+  <a href="Result.html"><i class="material-icons md-48 md-dark des">leaderboard</i>Result</a>
+  <a href="Statistics.html"><i class="material-icons md-48 md-dark des">analytics</i>Statistics</a>
+  <a href="Index.html"><i class="material-icons md-48 md-dark des">logout</i>Logout</a>
+</div>
+
+<div id="main">
+  <div class="container" onclick="myFunction(this),openNav(),closeNav()">
+  <div class="bar1"></div>
+  <div class="bar2"></div>
+  <div class="bar3"></div>
+</div>
+			<!-- Tabs navs -->
+<ul class="nav nav-tabs nav-fill mb-3" id="ex1" role="tablist">
+	<li class="nav-item" role="presentation">
+	  <a
+		class="nav-link active"
+		id="ex1-tab-1"
+		data-mdb-toggle="tab"
+		href="#ex1-tabs-1"
+		role="tab"
+		aria-controls="ex1-tabs-1"
+		aria-selected="true" 
+		style="font-size:17px;"
+		>Department Registration</a
+	  >
+	</li>
+	<li class="nav-item" role="presentation">
+	  <a
+		onclick="fetchdata()"
+		class="nav-link"
+		id="ex1-tab-2"
+		data-mdb-toggle="tab"
+		href="#ex1-tabs-2"
+		role="tab"
+		aria-controls="ex1-tabs-2"
+		aria-selected="false"
+		style="font-size:17px;"
+		>Student Registration</a
+	  >
+	</li>
+	<li class="nav-item" role="presentation">
+	  <a
+		onclick="fetchdata()"
+		class="nav-link"
+		download="basicstructure.xlsx"
+		id="ex1-tab-3"
+		data-mdb-toggle="tab"
+		href="#ex1-tabs-3"
+		role="tab"
+		aria-controls="ex1-tabs-3"
+		aria-selected="false"
+		style="font-size:17px;"
+		>excel Registration</a
+	  >
+	</li>
+	<li class="nav-item" role="presentation">
+		<a
+		  onclick="dropfetchdata()"
+		  class="nav-link"
+		  id="ex1-tab-4"
+		  data-mdb-toggle="tab"
+		  href="#ex1-tabs-4"
+		  role="tab"
+		  aria-controls="ex1-tabs-4"
+		  aria-selected="false"
+		  style="font-size:17px;"
+		  >Drop Registration</a
+		>
+	  </li>
+  </ul>
+  <!-- Tabs navs -->
+  
+  <!-- Tabs content -->
+  <div class="tab-content" id="ex1-content">
+	<div
+	  class="tab-pane fade show active"
+	  id="ex1-tabs-1"
+	  role="tabpanel"
+	  aria-labelledby="ex1-tab-1"
+	  style="margin-top:30px;"
+	>
+	<div class="card border border-primary table-responsive">
+		<table class="table table-borderless">
+			<thead>
+			  <tr>
+				<th scope="col"></th>
+				<th scope="col"></th>
+			  </tr>
+			</thead>
+			<tbody>
+			  <tr>
+				<td><p style="font-weight:bolder" >Enter Department:</p></td>
+				
+				<td><div class="form-outline" >
+					<input type="text" id="Register_department_name" class="form-control form-control-lg"/>
+					<label class="form-label" for="formControlLg">Enter Department Name</label>
+				  </div></td>
+				
+			  </tr>
+			  <tr>
+				<td><p style="font-weight:bolder" >Enter the Year:</p></td>
+				<td><select id="Register_year" class="form-select selectstyle" style="box-shadow:none;color:grey;font-weight:100;"  oninput='style.color="black"'>
+					<option selected="selected">Year</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+				  </select></td>
+			  </tr>
+			  <tr>
+				<td><p style="font-weight:bolder" >Section Count:</p></td>
+				<td><div class="form-outline" >
+					<input type="number" id="Register_no_of_sections" class="form-control form-control-lg"/>
+					<label class="form-label" for="formControlLg">No Of Section In Department</label>
+				  </div></td>
+			  </tr>
+			  <tr>
+				<td><p style="font-weight:bolder" >Head of Department:</p></td>
+				<td><div class="form-outline">
+					<input type="text" id="Register_head_of_department" class="form-control form-control-lg"/>
+					<label class="form-label" for="formControlLg">Head of Department Name</label>
+				  </div></td>
+			</tr>
+			<tr>
+				<td><p style="font-weight:bolder">Email:</p></td>
+				<td> <div class="form-outline">
+					<input type="text" id="Register_email" class="form-control form-control-lg"/>
+					<label class="form-label" for="formControlLg">Email</label>
+				  </div></td>
+			</tr>
+			</tbody>
+		  </table>
+		<button type="button" onclick="department()" class="btn btn-primary" style="width:30%;height:40px;font-size:15px;text-align:center;margin:auto;margin-top:10px;">Register</button>
+					</br>
+			
+		</div>
+	  </div>
+	<div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
+		<div class="card border border-primary table-responsive">
+			<table class="table table-borderless">
+				<thead>
+				  <tr>
+					<th scope="col"></th>
+					<th scope="col"></th>
+				  </tr>
+				</thead>
+				<tbody>
+				  <tr>
+					<td>
+						<p style="font-weight:bolder" >Enter Name:</p>
+					</td>
+					<td>
+						<div class="form-outline">
+							<input type="text" id="Student_name" class="form-control form-control-lg"/>
+							<label class="form-label" for="formControlLg">Enter Name</label>
+						  </div>
+					</td>
+				  </tr>
+				  <tr>
+					<td>
+						<p style="font-weight:bolder" >Enter Registration No:</p>
+					</td>
+					<td>
+						<div class="form-outline" >
+							<input type="text" id="Student_register_no" class="form-control form-control-lg"/>
+							<label class="form-label" for="formControlLg">Registration No:</label>
+						  </div>
+					</td>
+				  </tr>
+				  <tr>
+					<td>
+						<p style="font-weight:bolder" >Department Name:</p>
+					</td>
+					<td>
+						<select oninput="ondepartmentselected()" id="Student_department_name" class="form-select selectstyle" style="box-shadow:none;color:grey;font-weight:100;"  oninput='style.color="black"'>
+							<option disabled value="Department_Name" selected>Department Name</option>
+						  </select>
+					</td>
+				  </tr>
+				  <tr>
+					<td>
+						<p style="font-weight:bolder;display:inline;" >Year:</p>
+						<p>(Please Select Department)</p>
+					</td>
+					<td>
+						<select oninput="onyearselected()" id="Student_Year" class="form-select selectstyle" style="box-shadow:none;color:grey;font-weight:100;"  oninput='style.color="black"'>
+							<option disabled value="Year" selected>Year</option>
+						  </select>
+					</td>
+				  </tr>
+				  <tr>
+					<td>
+						<p style="font-weight:bolder;display:inline;" >Section:</p>
+						<p>(Please Select Year)</p>
+					</td>
+					<td>
+						<select id="Student_Section" class="form-select selectstyle" style="box-shadow:none;color:grey;font-weight:100;"  oninput='style.color="black"'>
+							<option disabled value="Section" selected>Section</option>
+							
+						  </select>
+					</td>
+				  </tr>
+				  <tr>
+					<td>
+						<p style="font-weight:bolder" >Enter Phone no:</p>
+					</td>
+					<td>
+						<div class="form-outline" >
+							<input type="text" id="Student_phno" class="form-control form-control-lg"/>
+							<label class="form-label" for="formControlLg">Phone no</label>
+						  </div>
+					</td>
+				  </tr>
+				  <tr>
+					<td>
+						<p style="font-weight:bolder" >Enter Email:</p>
+		
+					</td>
+					<td>
+						 <div class="form-outline" >
+							  <input type="text" id="Student_email" class="form-control form-control-lg"/>
+							  <label class="form-label" for="formControlLg">Email</label>
+							</div>
+					</td>
+				  </tr>
+				  <tr>
+					<td>
+						<p style="font-weight:bolder" >Blind:</p>
+					</td>
+					<td>
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="isblind" id="yes"/>
+							<label class="form-check-label" for="flexRadioDefault1"> Yes </label>
+						</div>
+					   <div class="form-check">
+						   <input class="form-check-input" type="radio" name="isblind" id="no" checked/>
+							<label class="form-check-label" for="flexRadioDefault2"> NO </label>
+						</div>
+					</td>
+				  </tr>
+				 
+				</tbody>
+			  </table>
+			  <button onclick="student()" type="button" class="btn btn-primary" style="width:30%;height:40px;font-size:15px;text-align:center;margin:auto;margin-top:10px;">Register</button>
+			</br>
+		</div>
+	</div>
+	<div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
+		<div class="card border border-primary">
+			<label for="formFileLg" style="margin-left:20px;margin-top:30px" class="form-label">Pick the Excel sheet:</label>
+			<input class="form-control form-control-lg" id="Student_upload" style="margin-left:20px;width:80%" type="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"/>
+		</br>
+			<button type="button" onclick="uploadstudentdetails()" class="btn btn-primary" style="margin:auto;width:30%;height:40px;">Upload</button>
+	</br>
+			<button class="btn btn-primary"  style="margin:auto;width:30%;height:40px;" onclick="loader();window.location.href='basicstructure.xlsx';disposer()">Basic File</button>
+	</br>
+			<a
+			data-mdb-toggle="collapse"
+			href="#collapseWithScrollbar"
+			role="button"
+			aria-expanded="false"
+			aria-controls="collapseExample"
+			style="margin:auto;"
+		>How to upload?</a>
+<div class="collapse mt-3 scroll-section" id="collapseWithScrollbar"  style="width:100%;height:100%;">
+<div id="carouselExampleCrossfade" class="carousel slide carousel-fade carousel-dark" data-mdb-ride="carousel">
+  <div class="carousel-indicators">
+    <button
+      type="button"
+      data-mdb-target="#carouselExampleCrossfade"
+      data-mdb-slide-to="0"
+      class="active"
+      aria-current="true"
+      aria-label="Slide 1"
+    ></button>
+    <button
+      type="button"
+      data-mdb-target="#carouselExampleCrossfade"
+      data-mdb-slide-to="1"
+      aria-label="Slide 2"
+    ></button>
+    <button
+      type="button"
+      data-mdb-target="#carouselExampleCrossfade"
+      data-mdb-slide-to="2"
+      aria-label="Slide 3"
+    ></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="https://mdbcdn.b-cdn.net/img/new/slides/041.webp" class="d-block w-100" alt="Wild Landscape"/>
+    </div>
+    <div class="carousel-item">
+      <img src="https://mdbcdn.b-cdn.net/img/new/slides/042.webp" class="d-block w-100" alt="Camera"/>
+    </div>
+    <div class="carousel-item">
+      <img src="https://mdbcdn.b-cdn.net/img/new/slides/043.webp" class="d-block w-100" alt="Exotic Fruits"/>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-mdb-target="#carouselExampleCrossfade" data-mdb-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-mdb-target="#carouselExampleCrossfade" data-mdb-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+</div>
+</div>
+	</div>
+	<div class="tab-pane fade" id="ex1-tabs-4" role="tabpanel" aria-labelledby="ex1-tab-4">
+		<div class="card border border-primary">
+		 <table class="table table-borderless">
+			  <thead>
+				<tr>
+					<td>
+						<p  >Department Name:</p>
+					</td>
+					<td>
+						<select oninput="ondropdepartmentselected()" id="Drop_department_name" class="form-select selectstyle" style="box-shadow:none;color:grey;font-weight:100;"  oninput='style.color="black"'>
+							<option value="Department_name">Department Name</option>
+						  </select>
+						
+					</td>
+				</tr>
+			<tr>
+			<td>
+				<p style="" >Enter Drop Year:</p>
+			</td>
+			<td>
+				<select id="Drop_Year" class="form-select selectstyle" style="box-shadow:none;color:grey;font-weight:100;"  oninput='style.color="black"'>
+					<option value="Year">Year</option>
+				  </select>
+				</td>
+				</tr>
+			<tr>
+				<td>
+					<p >Registration Number:</p>
+				</td>
+				<td>
+				  <div class="form-outline" >
+					  <input type="text" id="Drop_registration_number" class="form-control form-control-lg"/>
+					  <label class="form-label" for="Drop_register_number">Registration No:</label>
+					</div>
+					</tr>
+			  </thead>
+		  </table>
+		  <button type="button" onclick="dropdata()" class="btn btn-primary" style="width:30%;height:40px;margin-left:200px">Drop</button>
+		</br>
+		<p style="color:red;display:inline;margin-left:10px"> *Note:To drop Specific Department just Select Department and click Drop</p>
+		<p style="color:red;display:inline;margin-left:10px"> *Note:To drop Specific Year Select Department and Year</p>
+		<p style="color:red;display:inline;margin-left:10px"> *Note:To drop Specific Section Select Department and Year and Section</p>
+		<p style="color:red;display:inline;margin-left:10px"> *Note:To drop Student Just type register No</p>
+		<p style="color:red;display:inline;margin-left:10px"> Don't Select or add value for other do any of above</p>
+	 
+		</br>
+	  </br>
+		</div>
+	</div>
+  </div>
+
+</div>
+<div
+class="modal"
+id="errormodal"
+data-mdb-backdrop="static"
+data-mdb-keyboard="false"
+tabindex="-1"
+aria-labelledby="staticBackdropLabel"
+aria-hidden="true"
+>
+<div class="modal-dialog modal-dialog-centered no-select" style="width:auto;">
+  <div class="modal-content no-select" style="width:auto;margin-left:25%">
+	<div class="modal-header">
+        <button type="button" onclick="loadpage()" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+      </div>
+	<div class="modal-body no-select">
+	  <img id="myimg" alt="img not loaded" />
+	  <h2 align="center" id="qote"></h2>
+	  <p align="center" id="report"></p>
+	 </div>
+  </div>
+</div>
+</div>
+<div
+class="modal"
+id="myModal"
+data-mdb-backdrop="static"
+data-mdb-keyboard="false"
+tabindex="-1"
+aria-labelledby="staticBackdropLabel"
+aria-hidden="true"
+>
+<div class="modal-dialog modal-dialog-centered no-select" >
+  <div class="modal-content no-select" style="width:auto;margin-left:25%">
+	<div class="modal-body no-select">
+		<div class="spinner-border text-primary" role="status" style="float:left;width:3rem;height:3rem">
+	  </div>
+	
+	  <div style="float:right;margin-left:10px;margin-top:10px"> 
+	  <h4 class="text-primary">Loading<div class="spinner-grow spinner-grow-sm" style="height:7px;width:7px" role="status">
+	  </div>
+	  <div class="spinner-grow spinner-grow-sm" style="height:7px;width:7px" role="status">
+	  </div>
+	  <div class="spinner-grow spinner-grow-sm" style="height:7px;width:7px" role="status">
+	  </div></h4>
+	</div>
+	 </div>
+  </div>
+</div>
+</div>
+	<script>
+		
+		var val=0;
+		function openNav() {
+		  document.getElementById("mySidebar").style.width = "250px";
+		  document.getElementById("main").style.marginLeft = "250px";
+		}
+		
+		function closeNav() {
+		  val+=1
+		  if(val%2==0){
+		  document.getElementById("mySidebar").style.width = "0";
+		  document.getElementById("main").style.marginLeft= "0";
+		  }
+		}
+		function myFunction(x) {
+		  x.classList.toggle("change");
+		}
+		</script>
+		<script>
+			var acc = document.getElementsByClassName("accordion");
+			var i;
+			
+			for (i = 0; i < acc.length; i++) {
+			  acc[i].addEventListener("click", function() {
+				this.classList.toggle("active1");
+				var panel = this.nextElementSibling;
+				if (panel.style.maxHeight) {
+				  panel.style.maxHeight = null;
+				} else {
+				  panel.style.maxHeight = panel.scrollHeight + "px";
+				} 
+			  });
+			}
+			</script>
+	<script type="text/javascript" src="js/mdb.min.js"></script>
+	<script type="text/javascript" src="js/registration.js"></script>
+	<script>
+		var Error = document.getElementById('errormodal')
+		   var Errormodal = new mdb.Modal(Error)
+	</script>
+	<script>
+		var myModalEl = document.getElementById('myModal')
+		  var modal = new mdb.Modal(myModalEl)
+		  
+	</script>
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+		  const loadEl = document.querySelector('#load');
+		  try {
+			let app = firebase.app();
+			let features = [
+			  'auth', 
+			  'database', 
+			  'firestore',
+			  'functions',
+			  'messaging', 
+			  'storage', 
+			  'analytics', 
+			  'remoteConfig',
+			  'performance',
+			].filter(feature => typeof app[feature] === 'function');
+		  } catch (e) {
+			console.error(e);
+		  }
+		});
+	  </script>
+</body>
+</html>
